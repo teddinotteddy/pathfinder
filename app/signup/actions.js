@@ -5,7 +5,11 @@ import { db } from "@/db";
 import { lucia } from "@/lib/auth";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
-import { isValidEmail } from "@/lib/utils";
+import {
+  generateEmailVerificationCode,
+  isValidEmail,
+  sendVerificationCode,
+} from "@/lib/utils";
 import { userTable } from "@/db/schema";
 
 export async function signup(formData) {
@@ -26,12 +30,12 @@ export async function signup(formData) {
 
   try {
     const passwordHash = await hash(password, {
-        memoryCost: 19456,
-        timeCost: 2,
-        outputLen: 32,
-        parallelism: 1,
+      memoryCost: 19456,
+      timeCost: 2,
+      outputLen: 32,
+      parallelism: 1,
     });
-    
+
     const userId = generateIdFromEntropySize(10);
 
     await db.insert(userTable).values({
@@ -42,6 +46,9 @@ export async function signup(formData) {
       lastName: formData.get("last-name"),
     });
 
+    const verificationCode = await generateEmailVerificationCode(userId, email);
+    await sendVerificationCode(email, verificationCode);
+
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     cookies().set(
@@ -50,10 +57,10 @@ export async function signup(formData) {
       sessionCookie.attributes,
     );
 
-    return { success: true }
+    return { success: true };
   } catch (e) {
     console.log(e);
-    
-    return { error: "Something went wrong."}
+
+    return { error: "Something went wrong." };
   }
 }

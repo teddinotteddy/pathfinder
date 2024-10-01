@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +18,7 @@ import { login } from "./actions";
 
 export default function Login() {
   const { toast } = useToast();
+  const router = useRouter();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -28,6 +30,8 @@ export default function Login() {
         title: "Success",
         description: "Logged in.",
       });
+
+      router.push("/");
     } else {
       toast({
         title: "Error",
@@ -59,15 +63,6 @@ export default function Login() {
               />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  href="#"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
               <Input id="password" name="password" type="password" required />
             </div>
             <Button type="submit" className="w-full">

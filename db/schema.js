@@ -6,6 +6,9 @@ export const userTable = sqliteTable("user", {
   password_hash: text("password_hash").notNull(),
   firstName: text("firstName").notNull(),
   lastName: text("lastName").notNull(),
+  email_verified: integer("email_verified", { mode: "boolean" })
+    .default(0)
+    .notNull(),
 });
 
 export const sessionTable = sqliteTable("session", {
@@ -14,4 +17,12 @@ export const sessionTable = sqliteTable("session", {
     .notNull()
     .references(() => userTable.id),
   expiresAt: integer("expires_at").notNull(),
+});
+
+export const emailVerificationCode = sqliteTable("email_verification_code", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  code: text("code"),
+  user_id: text("user_id").unique().notNull(),
+  email: text("email").notNull(),
+  expires_at: integer("expires_at", { mode: "timestamp" }).notNull(),
 });
