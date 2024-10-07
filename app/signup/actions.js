@@ -5,11 +5,6 @@ import { db } from "@/db";
 import { lucia } from "@/lib/auth";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
-import {
-  generateEmailVerificationCode,
-  isValidEmail,
-  sendVerificationCode,
-} from "@/lib/utils";
 import { userTable } from "@/db/schema";
 
 export async function signup(formData) {
@@ -45,9 +40,6 @@ export async function signup(formData) {
       firstName: formData.get("first-name"),
       lastName: formData.get("last-name"),
     });
-
-    const verificationCode = await generateEmailVerificationCode(userId, email);
-    await sendVerificationCode(email, verificationCode);
 
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);

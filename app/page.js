@@ -5,9 +5,7 @@ export default async function Home() {
   const { user } = await validateRequest();
 
   if (!user) {
-    redirect("/login");
-  } else if (!user.emailVerified) {
-    redirect("/verification");
+    redirect("/signup");
   }
 
   return (
