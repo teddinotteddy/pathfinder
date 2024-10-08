@@ -1,5 +1,6 @@
 import { validateRequest } from "@/lib/validate-request";
 import { redirect } from "next/navigation";
+import Create from "./components/create";
 
 export default async function Home() {
   const { user } = await validateRequest();
@@ -10,7 +11,7 @@ export default async function Home() {
 
   return (
     <div>
-      <h1 className="text-2xl">Pathfinder</h1>
+      <Create />
     </div>
   );
 }
