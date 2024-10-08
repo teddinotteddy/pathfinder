@@ -160,7 +160,7 @@ export default function Create() {
                 </PopoverContent>
               </Popover>
             </div>
-            <Accordion type="multiple" collapsible>
+            <Accordion type="multiple" collapsible="true">
               <AccordionItem value="location">
                 <AccordionTrigger>Location</AccordionTrigger>
                 <AccordionContent>
