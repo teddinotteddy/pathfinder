@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Check, X } from "lucide-react";
+import { addDays, format } from "date-fns";
+import { useToast } from "@/hooks/use-toast";
+import { Calendar } from "@/components/ui/calendar";
+import { Check, CalendarIcon, X } from "lucide-react";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Card,
   CardHeader,
@@ -33,6 +37,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { createListing } from "../actions";
 
 const tags = [
   {
@@ -66,8 +71,14 @@ const tags = [
 ];
 
 export default function Create() {
+  const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [ageRequirement, setAgeRequirement] = useState("13+");
+  const [date, setDate] = useState({
+    from: new Date(),
+    to: addDays(new Date(), 30),
+  });
 
   const toggleTag = (currentTag) => {
     setSelectedTags((prev) =>
@@ -83,6 +94,34 @@ export default function Create() {
     );
   };
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    formData.append(
+      "tags",
+      JSON.stringify(selectedTags.map((tag) => tag.value)),
+    );
+
+    formData.append("dateRange", date);
+
+    formData.append("age", ageRequirement);
+
+    const result = await createListing(formData);
+
+    if (result.success) {
+      toast({
+        title: "Success",
+        description: "Listing created.",
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: result.error,
+        variant: "destructive",
+      });
+    }
+  }
   return (
     <div>
       <Card className="max-w-screen-sm">
@@ -93,7 +132,7 @@ export default function Create() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-2">
+          <form className="space-y-2" onSubmit={handleSubmit}>
             <div>
               <Label htmlFor="title">Title</Label>
               <Input
@@ -166,7 +205,11 @@ export default function Create() {
                 <AccordionContent>
                   <div className="p-2">
                     <Label htmlFor="location">Address</Label>
-                    <Input type="text" placeholder="123 Main St" />
+                    <Input
+                      type="text"
+                      placeholder="123 Main St"
+                      name="location"
+                    />
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -179,10 +222,81 @@ export default function Create() {
                     </p>
                     <div className="pt-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input type="text" placeholder="m@example.com" />
+                      <Input
+                        type="text"
+                        name="email"
+                        placeholder="m@example.com"
+                      />
                       <Label htmlFor="phone">Phone</Label>
-                      <Input type="tel" placeholder="(555) 555-5555" />
+                      <Input
+                        type="tel"
+                        name="phone"
+                        placeholder="(555) 555-5555"
+                      />
                     </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="age">
+                <AccordionTrigger>Age</AccordionTrigger>
+                <AccordionContent>
+                  <div className="p-2">
+                    <RadioGroup
+                      defaultValue="13+"
+                      onValueChange={setAgeRequirement}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="13+" id="13+" />
+                        <Label htmlFor="13+">13+</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="18+" id="18+" />
+                        <Label htmlFor="18+">18+</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="date">
+                <AccordionTrigger>Date</AccordionTrigger>
+                <AccordionContent>
+                  <div className="grid gap-2 p-2">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          id="date"
+                          variant={"outline"}
+                          className={cn(
+                            "w-[300px] justify-start text-left font-normal",
+                            !date && "text-muted-foreground",
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {date?.from ? (
+                            date.to ? (
+                              <>
+                                {format(date.from, "LLL dd, y")} -{" "}
+                                {format(date.to, "LLL dd, y")}
+                              </>
+                            ) : (
+                              format(date.from, "LLL dd, y")
+                            )
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          initialFocus
+                          mode="range"
+                          defaultMonth={date?.from}
+                          selected={date}
+                          onSelect={setDate}
+                          numberOfMonths={2}
+                        />
+                      </PopoverContent>
+                    </Popover>
                   </div>
                 </AccordionContent>
               </AccordionItem>

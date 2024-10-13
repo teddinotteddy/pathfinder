@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
 export const userTable = sqliteTable("user", {
@@ -14,4 +15,19 @@ export const sessionTable = sqliteTable("session", {
     .notNull()
     .references(() => userTable.id),
   expiresAt: integer("expires_at").notNull(),
+});
+
+export const listingTable = sqliteTable("listing", {
+  id: text("id").primaryKey().notNull(),
+  title: text("title").notNull(),
+  description: text("description"),
+  tags: text("tags").default(sql`(json_array())`),
+  location: text("location").notNull(),
+  email: text("email"),
+  phone: text("phone"),
+  age: text("age").notNull(),
+  dateRange: text("dateRange").notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => userTable.id),
 });
