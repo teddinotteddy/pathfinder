@@ -68,6 +68,14 @@ const tags = [
     value: "environmental",
     label: "Environmental",
   },
+  {
+    value: "pvsa",
+    label: "PVSA Approved",
+  },
+  {
+    value: "age-requirement",
+    label:"Age Requirement",
+  }
 ];
 
 export default function Create() {
@@ -99,7 +107,7 @@ export default function Create() {
     const formData = new FormData(event.target);
 
     formData.append(
-      "tags",
+      "tags", /*change the word the tag actually says, next step change color*/
       JSON.stringify(selectedTags.map((tag) => tag.value)),
     );
 
@@ -170,7 +178,7 @@ export default function Create() {
                     role="combobox"
                     aria-expanded={open}
                   >
-                    Tags
+                    Add Tags
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent>
