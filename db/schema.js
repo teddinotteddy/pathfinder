@@ -26,7 +26,10 @@ export const listingTable = sqliteTable("listing", {
   email: text("email"),
   phone: text("phone"),
   age: text("age").notNull(),
-  dateRange: text("dateRange").notNull(),
+  dateRange: text("dateRange", { mode: "json" }).notNull(),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`(current_timestamp)`),
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id),

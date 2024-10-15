@@ -103,7 +103,7 @@ export default function Create() {
       JSON.stringify(selectedTags.map((tag) => tag.value)),
     );
 
-    formData.append("dateRange", date);
+    formData.append("dateRange", JSON.stringify(date));
 
     formData.append("age", ageRequirement);
 
@@ -124,7 +124,7 @@ export default function Create() {
   }
   return (
     <div>
-      <Card className="max-w-screen-sm">
+      <Card className="w-auto min-w-[370px]">
         <CardHeader>
           <CardTitle>Create a Listing</CardTitle>
           <CardDescription>
@@ -133,18 +133,22 @@ export default function Create() {
         </CardHeader>
         <CardContent>
           <form className="space-y-2" onSubmit={handleSubmit}>
-            <div>
-              <Label htmlFor="title">Title</Label>
-              <Input
-                type="text"
-                name="title"
-                placeholder="Descriptive, eye-grabbing..."
-              />
-              <Label htmlFor="description">Description</Label>
-              <Textarea
-                name="description"
-                placeholder="Share more about your listing."
-              />
+            <div className="space-y-2">
+              <div>
+                <Label htmlFor="title">Title</Label>
+                <Input
+                  type="text"
+                  name="title"
+                  placeholder="Descriptive, eye-grabbing..."
+                />
+              </div>
+              <div>
+                <Label htmlFor="description">Description</Label>
+                <Textarea
+                  name="description"
+                  placeholder="Share more about your listing."
+                />
+              </div>
             </div>
             <div>
               <div className="pb-2">
@@ -207,7 +211,7 @@ export default function Create() {
                     <Label htmlFor="location">Address</Label>
                     <Input
                       type="text"
-                      placeholder="123 Main St"
+                      placeholder="1234 Main St, Lazytown, Iceland"
                       name="location"
                     />
                   </div>

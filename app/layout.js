@@ -27,9 +27,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className="p-4 flex h-screen flex-col justify-between space-y-4">
+        <main className="p-4 flex flex-col min-h-screen justify-between space-y-4">
           <Header />
-          {children}
+          <div className="flex-grow">{children}</div>
           <Footer />
         </main>
         <Toaster />
