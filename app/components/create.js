@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/accordion";
 import { createListing } from "../actions";
 
+
 const tags = [
   {
     value: "part-time",
@@ -177,6 +178,7 @@ export default function Create() {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
+                    // id= "addTags" doesn't work yet 
                   >
                     Add Tags
                   </Button>
@@ -226,7 +228,7 @@ export default function Create() {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="contact">
-                <AccordionTrigger>Contact</AccordionTrigger>
+                <AccordionTrigger>Contact Information</AccordionTrigger>
                 <AccordionContent>
                   <div className="p-2 space-y-2">
                     <p className="text-sm font-extralight">
@@ -250,7 +252,7 @@ export default function Create() {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="age">
-                <AccordionTrigger>Age</AccordionTrigger>
+                <AccordionTrigger>Age Requirement</AccordionTrigger>
                 <AccordionContent>
                   <div className="p-2">
                     <RadioGroup
@@ -258,19 +260,32 @@ export default function Create() {
                       onValueChange={setAgeRequirement}
                     >
                       <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="noAgeLimit" id="noAgeLimit" />
+                        <Label htmlFor="noAgeLimit">No age limit</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
                         <RadioGroupItem value="13+" id="13+" />
                         <Label htmlFor="13+">13+</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="16+" id="16+" />
+                        <Label htmlFor="16+">16+</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="18+" id="18+" />
                         <Label htmlFor="18+">18+</Label>
                       </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="other" id="other" />
+                        <Label htmlFor="other">Other</Label>
+                      </div>
+
                     </RadioGroup>
                   </div>
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="date">
-                <AccordionTrigger>Date</AccordionTrigger>
+                <AccordionTrigger>Date / Duration</AccordionTrigger>
                 <AccordionContent>
                   <div className="grid gap-2 p-2">
                     <Popover>

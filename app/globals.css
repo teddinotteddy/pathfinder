@@ -28,7 +28,7 @@ body {
 
 @layer base { /*light mode*/
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%; /*pop up color, white*/
     --card-foreground: 0 0% 3.9%;
@@ -82,8 +82,11 @@ body {
   }
   button{
     background: lavender;
-    border-width: 1px;
-    border-color: hsl(265 100% 47%);
+    border-width: 3px;
+    border-color:hsl(265 50% 80%);
+    border-style: outset;
+    margin-bottom: 2.5px;
+    padding: 10px;
   }
 }
 
