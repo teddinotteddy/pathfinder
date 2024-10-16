@@ -28,7 +28,8 @@ body {
 
 @layer base { /*light mode*/
   :root {
-    --background: 0 0% 0%;
+    --background: 238.7 83.5% 66.7%;
+    --background-image: url("/starBackground.png");
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%; /*pop up color, white*/
     --card-foreground: 0 0% 3.9%;
