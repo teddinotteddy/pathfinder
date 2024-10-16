@@ -2,7 +2,6 @@
 
 import { db } from "@/db";
 import { listingTable } from "@/db/schema";
-import { count } from "drizzle-orm";
 import { generateIdFromEntropySize } from "lucia";
 import { validateRequest } from "@/lib/validate-request";
 
