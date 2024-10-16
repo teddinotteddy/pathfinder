@@ -10,7 +10,10 @@ export default async function Header() {
     <div className="pb-2">
       <div className="flex justify-between">
         <Link href="/" className="pb-2">
-          <Button variant="ghost" className="text-3xl font-bold p-4">
+          <Button
+            variant="ghost"
+            className="text-3xl font-bold p-4 text-indigo-700 hover:text-indigo-700"
+          >
             Pathfinder
           </Button>
         </Link>

@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <div className="homepage">
       <div className="flex flex-col items-center min-h-screen p-4 bg-[url('/public/starBackground.PNG')]">
-        <div className="w-full max-w-2xl">
+        <div className="w-full max-w-2xl mt-14">
           <Create />
           <div className="mt-8 space-y-4">
             {listings.map((listing) => (

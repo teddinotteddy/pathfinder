@@ -147,7 +147,9 @@ export default function Create() {
           <form className="space-y-2" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <div>
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="title" className="text-md font-medium">
+                  Title
+                </Label>
                 <Input
                   type="text"
                   name="title"
@@ -155,7 +157,9 @@ export default function Create() {
                 />
               </div>
               <div>
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description" className="text-md font-medium">
+                  Description
+                </Label>
                 <Textarea
                   name="description"
                   placeholder="Share more about your listing."
@@ -181,7 +185,6 @@ export default function Create() {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    // id= "addTags" doesn't work yet
                   >
                     Add Tags
                   </Button>

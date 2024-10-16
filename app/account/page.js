@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { logout } from "./actions";
 import { validateRequest } from "@/lib/validate-request";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default async function Account() {
   const { user } = await validateRequest();
@@ -11,11 +12,22 @@ export default async function Account() {
   }
 
   return (
-    <div className="account">
-      <h1>Account</h1>
-      <Button type="submit" action={logout}>
-        Logout
-      </Button>
+    <div className="account flex flex-col items-center min-h-screen">
+      <Card className=" w-full max-w-2xl mt-14">
+        <CardHeader>
+          <CardTitle>Account</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            <div>
+              <h1>{user.email}</h1>
+            </div>
+            <Button type="submit" action={logout}>
+              Logout
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
