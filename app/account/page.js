@@ -11,7 +11,7 @@ export default async function Account() {
   }
 
   return (
-    <div>
+    <div className="account">
       <h1>Account</h1>
       <Button type="submit" action={logout}>
         Logout

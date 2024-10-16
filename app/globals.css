@@ -17,7 +17,46 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.homepage {
+  position: relative;
+  z-index: 1;
+}
+
+.homepage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/doodleBackground.PNG");
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.account {
+  position: relative;
+  z-index: 1;
+}
+
+.account::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/doodleBackground.PNG");
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
 }
 
 @layer utilities {
@@ -26,11 +65,11 @@ body {
   }
 }
 
-@layer base { /*light mode*/
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%; /*pop up color, white*/
+    --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
@@ -45,7 +84,7 @@ body {
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
-    --input:265 100% 47%; /*border color for input boxes*/
+    --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -54,7 +93,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
-  .dark { /*dark mode*/
+  .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -80,11 +119,6 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-  button{
-    background: lavender;
-    border-width: 1px;
-    border-color: hsl(265 100% 47%);
-  }
 }
 
 @layer base {
@@ -95,10 +129,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-
-/* individual elements
-#addTags{
-  border-width: 2px;
-  border-style: groove;
-} */
