@@ -76,6 +76,10 @@ const tags = [
   {
     value: "age-requirement",
     label:"Age Requirement",
+  },
+  {
+    value: "laboratory-work",
+    label: "Laboratory Work",
   }
 ];
 
@@ -257,8 +261,7 @@ export default function Create() {
                   <div className="p-2">
                     <RadioGroup
                       defaultValue="13+"
-                      onValueChange={setAgeRequirement}
-                    >
+                      onValueChange={setAgeRequirement}>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="noAgeLimit" id="noAgeLimit" />
                         <Label htmlFor="noAgeLimit">No age limit</Label>
