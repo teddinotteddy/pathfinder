@@ -8,7 +8,7 @@ export default async function Home() {
   const { user } = await validateRequest();
 
   if (!user) {
-    redirect("/signup");
+    redirect("/landing");
   }
 
   const { listings } = await getListings();
