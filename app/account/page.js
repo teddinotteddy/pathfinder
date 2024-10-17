@@ -22,9 +22,9 @@ export default async function Account() {
             <div>
               <h1>{user.email}</h1>
             </div>
-            <Button type="submit" action={logout}>
-              Logout
-            </Button>
+            <form action={logout}>
+              <Button type="submit">Logout</Button>
+            </form>
           </div>
         </CardContent>
       </Card>

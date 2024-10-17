@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <div className="homepage">
-      <div className="flex flex-col items-center min-h-screen p-4 bg-[url('/public/starBackground.PNG')]">
+      <div className="flex flex-col items-center min-h-screen p-4">
         <div className="w-full max-w-2xl mt-14">
           <Create />
           <h1 className="text-4xl font-bold text-center text-indigo-700 pt-4">
