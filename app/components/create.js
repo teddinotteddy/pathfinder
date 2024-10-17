@@ -80,6 +80,18 @@ const tags = [
     value: "laboratory-work",
     label: "Laboratory Work",
   },
+  {
+    value: "tutoring",
+    label: "Tutoring",
+  },
+  {
+    value: "stem",
+    label: "STEM-related",
+  },
+  {
+    value: "liberal",
+    label: "Liberal Arts",
+  },
 ];
 
 export default function Create() {
@@ -227,7 +239,7 @@ export default function Create() {
                     <Label htmlFor="location">Address</Label>
                     <Input
                       type="text"
-                      placeholder="1234 Main St, Lazytown, Iceland"
+                      placeholder="1234 Main St, Lazytown, Iceland. or put N/A if program is remote"
                       name="location"
                     />
                   </div>
@@ -251,7 +263,7 @@ export default function Create() {
                       <Input
                         type="tel"
                         name="phone"
-                        placeholder="(555) 555-5555"
+                        placeholder="(210) 555-5555"
                       />
                     </div>
                   </div>
