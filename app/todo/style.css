@@ -1,15 +1,16 @@
 /*CSS Code, background img, etc.*/
-.todo-background {
-  background-image: url('/doodleBackground.PNG');
+/*.todo-background {
+  background-color: white;
   background-size: cover;
   background-position: center;
-}
+}*/
 
+/*Alternative
 .todo-body {
   background-image: url('/doodleBackground.PNG');
   background-size: cover;
   background-position: center;
-  margin: 0; /* Prevent default margin */
-  height: 100vh; /* Ensure it covers the full viewport height */
-}
+  margin: 0; /* Prevent default margin 
+  height: 100vh; /* Ensure it covers the full viewport height 
+}*/
 

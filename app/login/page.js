@@ -42,7 +42,7 @@ export default function Login() {
   }
 
   return (
-    <div className="account flex flex-col items-center min-h-screen">
+    <div className="login flex flex-col items-center min-h-screen">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
