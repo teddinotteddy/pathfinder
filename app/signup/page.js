@@ -41,7 +41,7 @@ export default function Signup() {
 
   return (
     <div className="login flex flex-col items-center min-h-screen">
-      <Card className="mx-auto max-w-sm">
+      <Card className="mx-auto max-w-sm mt-14">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>

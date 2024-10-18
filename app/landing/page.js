@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 export default function Landing() {
   return (
     <div className="landing flex flex-col items-center min-h-screen p-4">
-      <Card>
+      <Card className="mt-14">
         <CardHeader></CardHeader>
         <CardContent>
           <p>

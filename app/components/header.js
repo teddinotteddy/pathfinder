@@ -18,13 +18,27 @@ export default async function Header() {
           </Button>
         </Link>
         {!user ? (
-          <Link href="/signup">
-            <Button className="text-lg p-4">Signup</Button>
-          </Link>
+          <div className="space-x-2">
+            <Link href="/login">
+              <Button className="text-lg p-4" variant="outline">
+                Login
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button className="text-lg p-4">Signup</Button>
+            </Link>
+          </div>
         ) : (
-          <Link href="/account">
-            <Button className="text-lg p-4">Account</Button>
-          </Link>
+          <div className="space-x-2">
+            <Link href="/todo">
+              <Button className="text-lg p-4" variant="outline">
+                Todo
+              </Button>
+            </Link>
+            <Link href="/account">
+              <Button className="text-lg p-4">Account</Button>
+            </Link>
+          </div>
         )}
       </div>
       <Separator />
