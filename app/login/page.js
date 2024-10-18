@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
+import { login } from "./actions";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,14 +16,19 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { login } from "./actions";
 
 export default function Login() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { toast } = useToast();
+
   const router = useRouter();
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    setIsSubmitting(true);
+
     const formData = new FormData(event.target);
     const result = await login(formData);
 
@@ -39,6 +46,8 @@ export default function Login() {
         variant: "destructive",
       });
     }
+
+    setIsSubmitting(false);
   }
 
   return (
@@ -66,8 +75,8 @@ export default function Login() {
               <div className="grid gap-2">
                 <Input id="password" name="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Logging in..." : "Login"}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
