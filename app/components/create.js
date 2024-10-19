@@ -53,6 +53,18 @@ const tags = [
     label: "Remote",
   },
   {
+    value: "one-day",
+    label: "One day event",
+  },
+  {
+    value: "summer",
+    label: "Summer",
+  },
+  {
+    value: "paid",
+    label: "Paid",
+  },
+  {
     value: "nonprofit",
     label: "Nonprofit",
   },
@@ -65,8 +77,24 @@ const tags = [
     label: "Community Service",
   },
   {
+    value: "social-activism",
+    label: "Social activism",
+  },
+  {
     value: "environmental",
     label: "Environmental",
+  },
+  {
+    value: "leadership",
+    label: "Leadership",
+  },
+  {
+    value: "coding",
+    label: "Coding",
+  },
+  {
+    value: "sports",
+    label: "Sports",
   },
   {
     value: "pvsa",
