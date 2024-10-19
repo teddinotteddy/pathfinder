@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,17 +16,10 @@ import { Label } from "@/components/ui/label";
 import { signup } from "./actions";
 
 export default function Signup() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const { toast } = useToast();
-
-  const router = useRouter();
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    setIsSubmitting(true);
-
     const formData = new FormData(event.target);
     const result = await signup(formData);
 
@@ -46,13 +37,11 @@ export default function Signup() {
         variant: "destructive",
       });
     }
-
-    setIsSubmitting(false);
   }
 
   return (
-    <div className="login flex flex-col items-center min-h-screen">
-      <Card className="mx-auto max-w-sm mt-14">
+    <div className="signup flex flex-col items-center min-h-screen">
+      <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>
@@ -96,8 +85,8 @@ export default function Signup() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" name="password" type="password" />
               </div>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Creating account..." : "Create account"}
+              <Button type="submit" className="w-full">
+                Create an account
               </Button>
             </div>
           </form>
