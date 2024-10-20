@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,10 +17,15 @@ import { Label } from "@/components/ui/label";
 import { signup } from "./actions";
 
 export default function Signup() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { toast } = useToast();
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    setIsSubmitting(true);
+
     const formData = new FormData(event.target);
     const result = await signup(formData);
 
@@ -40,8 +46,8 @@ export default function Signup() {
   }
 
   return (
-    <div className="signup flex flex-col items-center min-h-screen">
-      <Card className="mx-auto max-w-sm">
+    <div className="login flex flex-col items-center min-h-screen">
+      <Card className="mx-auto max-w-sm mt-14">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>
@@ -85,8 +91,8 @@ export default function Signup() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" name="password" type="password" />
               </div>
-              <Button type="submit" className="w-full">
-                Create an account
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Creating account..." : "Create account"}
               </Button>
             </div>
           </form>
