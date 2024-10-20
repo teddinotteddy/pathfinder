@@ -7,6 +7,7 @@ export const userTable = sqliteTable("user", {
   password_hash: text("password_hash").notNull(),
   firstName: text("firstName").notNull(),
   lastName: text("lastName").notNull(),
+  todo: text("todo", { mode: "json" }).default(sql`(json_array())`),
 });
 
 export const sessionTable = sqliteTable("session", {

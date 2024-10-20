@@ -1,6 +1,6 @@
 import { validateRequest } from "@/lib/validate-request";
 import { redirect } from "next/navigation";
-import { getListings } from "./actions";
+import { getListings, getTodos } from "./actions";
 import Listing from "./components/listing";
 import Create from "./components/create";
 
@@ -12,6 +12,11 @@ export default async function Home() {
   }
 
   const { listings } = await getListings();
+  let todos = await getTodos(user.id);
+
+  if (typeof todos === "string") {
+    todos = JSON.parse(todos);
+  }
 
   return (
     <div className="homepage">
@@ -23,7 +28,7 @@ export default async function Home() {
           </h1>
           <div className="mt-8 space-y-4">
             {listings.map((listing) => (
-              <Listing key={listing.id} listing={listing} />
+              <Listing key={listing.id} listing={listing} todos={todos} />
             ))}
           </div>
         </div>

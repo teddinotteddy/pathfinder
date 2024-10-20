@@ -13,7 +13,7 @@ export default async function Account() {
 
   return (
     <div className="account flex flex-col items-center min-h-screen">
-      <Card className=" w-full max-w-2xl mt-14">
+      <Card className="w-full max-w-2xl mt-14">
         <CardHeader>
           <CardTitle>Account</CardTitle>
         </CardHeader>

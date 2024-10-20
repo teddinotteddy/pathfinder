@@ -59,7 +59,6 @@ body {
   pointer-events: none;
 }
 
-
 .landing {
   position: relative;
   z-index: 1;
@@ -120,6 +119,45 @@ body {
   pointer-events: none;
 }
 
+.todo {
+  position: relative;
+  z-index: 1;
+}
+
+.todo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/doodleBackground.PNG");
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  opacity: 0.3;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.listing-page {
+  position: relative;
+  z-index: 1;
+}
+
+.listing-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/doodleBackground.PNG");
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
 
 @layer utilities {
   .text-balance {

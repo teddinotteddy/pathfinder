@@ -1,9 +1,11 @@
 "use server";
 
 import { db } from "@/db";
-import { listingTable } from "@/db/schema";
+import { eq } from "drizzle-orm";
+import { listingTable, userTable } from "@/db/schema";
 import { generateIdFromEntropySize } from "lucia";
 import { validateRequest } from "@/lib/validate-request";
+import { revalidatePath } from "next/cache";
 
 export async function createListing(formData) {
   const { user } = await validateRequest();
@@ -63,5 +65,75 @@ export async function getListings() {
     console.log(e);
 
     return { error: "Something went wrong while fetching listings." };
+  }
+}
+
+export async function getListing(id) {
+  try {
+    const listing = await db
+      .select()
+      .from(listingTable)
+      .where(eq(listingTable.id, id));
+
+    return listing[0];
+  } catch (e) {
+    console.log(e);
+
+    return { error: "Something went wrong while fetching listing." };
+  }
+}
+
+export async function addTodo(formData) {
+  const { user } = await validateRequest();
+
+  if (!user) {
+    return { error: "You must be logged in to add a todo." };
+  }
+
+  const id = formData.get("id");
+
+  try {
+    const currentTodo = await db
+      .select({
+        todo: userTable.todo,
+      })
+      .from(userTable)
+      .where(eq(userTable.id, user.id));
+
+    let todoList = currentTodo[0]?.todo;
+
+    if (typeof todoList === "string") {
+      todoList = JSON.parse(todoList);
+    }
+
+    todoList.push(id);
+
+    await db
+      .update(userTable)
+      .set({ todo: JSON.stringify(todoList) })
+      .where(eq(userTable.id, user.id));
+
+    revalidatePath("/");
+
+    return { success: true };
+  } catch (e) {
+    console.log(e);
+
+    return { error: "Something went wrong while adding to your todo list." };
+  }
+}
+
+export async function getTodos(userId) {
+  try {
+    const user = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.id, userId));
+
+    return user[0].todo;
+  } catch (e) {
+    console.log(e);
+
+    return { error: "Something went wrong while fetching todos." };
   }
 }

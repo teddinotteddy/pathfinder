@@ -1,4 +1,9 @@
+"use client";
+
+import { useTransition } from "react";
+import { addTodo } from "../actions";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -7,10 +12,40 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
-export default function Listing({ listing }) {
+export default function Listing({ listing, todos }) {
+  const { toast } = useToast();
+
   const tags = JSON.parse(listing.tags);
   const date = JSON.parse(listing.dateRange);
+
+  const isInTodos = todos.includes(listing.id);
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    startTransition(async () => {
+      const formData = new FormData(event.target);
+
+      try {
+        await addTodo(formData);
+        toast({
+          title: "Success",
+          description: "To-do item added successfully!",
+          variant: "success",
+        });
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to add to-do item.",
+          variant: "destructive",
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -32,7 +67,7 @@ export default function Listing({ listing }) {
             </div>
             {tags.length > 0 && (
               <div className="space-x-1 space-y-1">
-                <h1 className=" font-bold">Tags</h1>
+                <h1 className="font-bold">Tags</h1>
                 {tags.map((tag) => (
                   <Badge key={tag} variant="outline">
                     {tag}
@@ -44,12 +79,18 @@ export default function Listing({ listing }) {
               <h1 className="font-bold">Age Requirement</h1>
               <p className="text-sm">{listing.age}</p>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 pb-2">
               <h1 className="font-bold">Dates</h1>
               <p className="text-sm">
                 {formatDate(date.from)} {`\u2192`} {formatDate(date.to)}
               </p>
             </div>
+            <form onSubmit={handleSubmit}>
+              <input type="hidden" name="id" value={listing.id} />
+              <Button disabled={isInTodos || isPending}>
+                {isPending ? "Adding..." : isInTodos ? "Added" : "Add to To-Do"}
+              </Button>
+            </form>
           </div>
         </CardContent>
       </Card>
