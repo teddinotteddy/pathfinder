@@ -149,6 +149,14 @@ export default function Search({ listings, todos }) {
   return (
     <div>
       <div className="flex space-x-2 mt-8">
+        <Input
+          type="text"
+          name="search"
+          className="bg-white"
+          placeholder="Search listings..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
         <Popover>
           <PopoverTrigger asChild>
             <Button size="icon">
@@ -184,17 +192,6 @@ export default function Search({ listings, todos }) {
             </Command>
           </PopoverContent>
         </Popover>
-        <Input
-          type="text"
-          name="search"
-          className="bg-white"
-          placeholder="Search listings..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <Button size="icon">
-          <MagnifyingGlassIcon className="w-6 h-6" />
-        </Button>
       </div>
       <div className="pt-4 space-y-4">
         {filteredListings.length > 0 ? (
