@@ -94,7 +94,9 @@ body {
     background-position: 0% 50%;
   }
 }
-
+.landing footer{
+  background-image:url("/doodleBackground1.PNG");
+}
 .login {
   position: relative;
   z-index: 1;
