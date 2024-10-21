@@ -71,12 +71,28 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/doodleBackground1.PNG");
-  background-repeat: repeat;
-  background-size: 500px 500px;
-  opacity: 0.3;
+  /*background-image: url("/doodleBackground1.PNG");*/
+  background: linear-gradient(0.25turn, hsl(275, 100%, 82%),hsl(239, 100%, 69%),hsl(208, 100%, 67%),hsl(186, 100%, 81%)); 
+  background-size: 400% 400%;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: gradient 10s ease infinite;
+  background-size: 200% 200%;
+  opacity: 1;
   z-index: -1;
   pointer-events: none;
+}
+
+@keyframes gradient{
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
 }
 
 .login {
