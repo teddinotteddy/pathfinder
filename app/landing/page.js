@@ -34,7 +34,7 @@ export default function Landing() {
           <Image
             src="/portrait.jpg"
             alt="Image of Taj and Kunling, the creators of this web app, coding and discussing"
-            class="mr-4 w-96 h-96 object-cover rounded-lg shadow-lg rotate-4"
+            class="mr-4 w-96 h-96 object-cover rounded-lg shadow-lg -rotate-4"
             height={380}
             width={270}
           />
