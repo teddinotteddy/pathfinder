@@ -28,6 +28,8 @@ export const listingTable = sqliteTable("listing", {
   phone: text("phone"),
   age: text("age").notNull(),
   dateRange: text("dateRange", { mode: "json" }).notNull(),
+  deadline: text("deadline", { mode: "json" }),
+  website: text("website"),
   createdAt: text("created_at")
     .notNull()
     .default(sql`(current_timestamp)`),

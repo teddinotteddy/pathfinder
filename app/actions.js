@@ -22,7 +22,9 @@ export async function createListing(formData) {
   const email = formData.get("email");
   const phone = formData.get("phone");
   const age = formData.get("age");
+  const website = formData.get("website");
   const dateRange = formData.get("dateRange");
+  const deadline = formData.get("deadline");
   const location = formData.get("location");
 
   try {
@@ -36,7 +38,9 @@ export async function createListing(formData) {
       email: email,
       phone: phone,
       age: age,
+      website: website,
       dateRange: dateRange,
+      deadline: deadline,
     });
 
     return { success: true };

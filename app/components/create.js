@@ -127,6 +127,7 @@ export default function Create() {
   const [open, setOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [ageRequirement, setAgeRequirement] = useState("13+");
+  const [deadline, setDeadline] = useState(new Date());
   const [date, setDate] = useState({
     from: new Date(),
     to: addDays(new Date(), 30),
@@ -293,6 +294,12 @@ export default function Create() {
                         name="phone"
                         placeholder="(210) 555-5555"
                       />
+                      <Label htmlFor="website">Website</Label>
+                      <Input
+                        type="text"
+                        name="website"
+                        placeholder="https://example.com"
+                      />
                     </div>
                   </div>
                 </AccordionContent>
@@ -330,9 +337,10 @@ export default function Create() {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="date">
-                <AccordionTrigger>Date / Duration</AccordionTrigger>
+                <AccordionTrigger>Date / Deadline</AccordionTrigger>
                 <AccordionContent>
                   <div className="grid gap-2 p-2">
+                    <Label>Date / Duration</Label>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
@@ -366,6 +374,33 @@ export default function Create() {
                           selected={date}
                           onSelect={setDate}
                           numberOfMonths={2}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <Label>Deadline</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[300px] justify-start text-left font-normal",
+                            !deadline && "text-muted-foreground",
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {deadline ? (
+                            format(deadline, "PPP")
+                          ) : (
+                            <span>Pick a deadline</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={deadline}
+                          onSelect={setDeadline}
+                          initialFocus
                         />
                       </PopoverContent>
                     </Popover>

@@ -1,15 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Landing() {
   return (
     <div className="landing flex flex-col items-center min-h-screen p-2">
       <Card className="p-36 pt-8 mt-6 text-center mx-8">
         <CardHeader>
-          <img
+          <Image
             src="/pathfinder.PNG"
-            alt="Description of the image"
-            class="w-32 h-35 object-cover mx-auto  pt-1 "
-          ></img>
+            alt="Pathfinder logo"
+            height={128}
+            width={128}
+            className="mx-auto pt-1"
+          />
           <CardTitle className="text-5xl bg-gradient-to-r from-indigo-600 via-fuchsia-500 to-indigo-600 inline-block text-transparent bg-clip-text">
             Welcome to Pathfinder
           </CardTitle>

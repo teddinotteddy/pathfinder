@@ -19,6 +19,7 @@ export default function Listing({ listing, todos }) {
 
   const tags = JSON.parse(listing.tags);
   const date = JSON.parse(listing.dateRange);
+  const deadline = JSON.parse(listing.deadline);
 
   const isInTodos = todos.includes(listing.id);
 
@@ -47,6 +48,11 @@ export default function Listing({ listing, todos }) {
     });
   };
 
+  const formattedDeadline =
+    formatDate(deadline) === "12/31/1969"
+      ? "No deadline"
+      : formatDate(deadline);
+
   return (
     <div>
       <Card className="max-w-screen-md">
@@ -64,6 +70,7 @@ export default function Listing({ listing, todos }) {
               <h1 className="font-bold">Contact</h1>
               <p className="text-sm">{listing.email}</p>
               <p className="text-sm">{listing.phone}</p>
+              <p className="text-sm">{listing.website}</p>
             </div>
             {tags.length > 0 && (
               <div className="space-x-1 space-y-1">
@@ -80,10 +87,11 @@ export default function Listing({ listing, todos }) {
               <p className="text-sm">{listing.age}</p>
             </div>
             <div className="space-y-1 pb-2">
-              <h1 className="font-bold">Dates</h1>
+              <h1 className="font-bold">Date / Deadline</h1>
               <p className="text-sm">
                 {formatDate(date.from)} {`\u2192`} {formatDate(date.to)}
               </p>
+              <p className="text-sm">{formattedDeadline}</p>
             </div>
             <form onSubmit={handleSubmit}>
               <input type="hidden" name="id" value={listing.id} />
