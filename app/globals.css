@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -76,7 +80,7 @@ body {
   background-size: 400% 400%;
   background-repeat: no-repeat;
   background-position: center;
-  animation: gradient 10s ease infinite;
+  animation: gradient 8s ease infinite;
   background-size: 200% 200%;
   opacity: 1;
   z-index: -1;
@@ -93,6 +97,13 @@ body {
   100%{
     background-position: 0% 50%;
   }
+}
+
+.-rotate-4 {
+  transform: rotate(-4deg);
+}
+.rotate-4 {
+  transform: rotate(4deg);
 }
 
 .login {
