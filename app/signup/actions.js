@@ -6,6 +6,7 @@ import { lucia } from "@/lib/auth";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
 import { userTable } from "@/db/schema";
+import { isValidEmail } from "@/lib/utils";
 
 export async function signup(formData) {
   const email = formData.get("email");

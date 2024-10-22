@@ -15,11 +15,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signup } from "./actions";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { toast } = useToast();
+
+  const router = useRouter()
 
   async function handleSubmit(event) {
     event.preventDefault();
