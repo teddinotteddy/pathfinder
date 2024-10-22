@@ -32,7 +32,7 @@ export default function Landing() {
       <div className="m-8 flex flex-col min-h-screen items-center: none p-2 w-3/5">
         <div class="flex items-center space-x-4">
           <img src="portrait.jpg" alt="Image of Taj and Kunling, the creators of this web app, coding and discussing" 
-          class="mr-4 w-96 h-96 object-cover rounded-lg shadow-lg -rotate-4"></img>
+          class="mr-4 w-96 h-96 object-cover rounded-lg shadow-lg rotate-4"></img>
           <Card className="mt-8 mx-20 ml-60 mr-10 shadow-xl">
     
             <CardHeader className="text-2xl font-semibold text-fuchsia-700">The Birth of Pathfinder</CardHeader>
