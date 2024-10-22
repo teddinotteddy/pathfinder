@@ -5,6 +5,8 @@ import Listing from "./components/listing";
 import Create from "./components/create";
 import Search from "./components/search";
 
+// for kunlings commit to work
+
 export default async function Home() {
   const { user } = await validateRequest();
 
