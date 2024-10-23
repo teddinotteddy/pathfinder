@@ -13,12 +13,9 @@ import {
 } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
 
-export default function Listing({ listing, todos, page }) {
+export default function Listing({ listing, todos, page, userId }) {
   const { toast } = useToast();
-
-  const router = useRouter();
 
   if (page !== true) {
     page = false;
@@ -40,8 +37,6 @@ export default function Listing({ listing, todos, page }) {
 
       try {
         await addTodo(formData);
-
-        router.refresh();
 
         toast({
           title: "Success",

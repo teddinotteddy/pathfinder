@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { cn } from "@/lib/utils";
 import { addDays, format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 import { Calendar } from "@/components/ui/calendar";
 import { Check, CalendarIcon, X } from "lucide-react";
 import { Label } from "@radix-ui/react-label";
@@ -131,6 +132,8 @@ const tags = [
 export default function Create() {
   const { toast } = useToast();
 
+  const router = useRouter();
+
   const [open, setOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [ageRequirement, setAgeRequirement] = useState("13+");
@@ -178,6 +181,8 @@ export default function Create() {
           title: "Success",
           description: "Listing created.",
         });
+
+        router.refresh();
       } else {
         toast({
           title: "Error",
