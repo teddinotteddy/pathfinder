@@ -100,6 +100,10 @@ const tags = [
     label: "Coding",
   },
   {
+    value: "graphic-design",
+    label: "Graphic Design & Arts",
+  },
+  {
     value: "sports",
     label: "Sports",
   },
