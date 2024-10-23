@@ -1,7 +1,6 @@
 import { validateRequest } from "@/lib/validate-request";
 import { redirect } from "next/navigation";
 import { getListings, getTodos } from "./actions";
-import Listing from "./components/listing";
 import Create from "./components/create";
 import Search from "./components/search";
 
