@@ -115,7 +115,7 @@ const tags = [
   },
 ];
 
-export default function Search({ listings, todos }) {
+export default function Search({ listings, todos, userId }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -196,7 +196,12 @@ export default function Search({ listings, todos }) {
       <div className="pt-4 space-y-4">
         {filteredListings.length > 0 ? (
           filteredListings.map((listing) => (
-            <Listing key={listing.id} listing={listing} todos={todos} />
+            <Listing
+              key={listing.id}
+              listing={listing}
+              todos={todos}
+              userId={userId}
+            />
           ))
         ) : (
           <p className="text-center text-muted-foreground">

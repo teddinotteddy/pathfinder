@@ -87,6 +87,22 @@ export async function getListing(id) {
   }
 }
 
+export async function deleteListing(formData) {
+  const id = formData.get("id");
+
+  try {
+    await db.delete(listingTable).where(eq(listingTable.id, id));
+
+    revalidatePath("/");
+
+    return { success: true };
+  } catch (e) {
+    console.log(e);
+
+    return { error: "Something went wrong while deleting the listing." };
+  }
+}
+
 export async function addTodo(formData) {
   const { user } = await validateRequest();
 

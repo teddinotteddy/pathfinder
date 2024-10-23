@@ -5,8 +5,6 @@ import Listing from "./components/listing";
 import Create from "./components/create";
 import Search from "./components/search";
 
-// for kunlings commit to work
-
 export default async function Home() {
   const { user } = await validateRequest();
 
@@ -29,7 +27,7 @@ export default async function Home() {
           <h1 className="text-4xl font-bold text-center text-indigo-700 pt-4">
             Listings
           </h1>
-          <Search listings={listings} todos={todos} />
+          <Search listings={listings} todos={todos} userId={user.id} />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { addTodo } from "../actions";
+import { addTodo, deleteListing as deleteListingAction } from "../actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +28,13 @@ export default function Listing({ listing, todos, page, userId }) {
   const isInTodos = todos.includes(listing.id);
 
   const [isPending, startTransition] = useTransition();
+  const [isDeleting, startDeleteTransition] = useTransition();
+
+  let deleteable = false;
+
+  if (listing.userId === userId) {
+    deleteable = true;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,6 +54,30 @@ export default function Listing({ listing, todos, page, userId }) {
         toast({
           title: "Error",
           description: "Failed to add to-do item.",
+          variant: "destructive",
+        });
+      }
+    });
+  };
+
+  const handleDeleteListing = (event) => {
+    event.preventDefault();
+
+    startDeleteTransition(async () => {
+      const formData = new FormData(event.target);
+
+      try {
+        await deleteListingAction(formData);
+
+        toast({
+          title: "Success",
+          description: "Listing item deleted successfully.",
+          variant: "success",
+        });
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to delete listing.",
           variant: "destructive",
         });
       }
@@ -98,18 +129,28 @@ export default function Listing({ listing, todos, page, userId }) {
               </p>
               <p className="text-sm">{formattedDeadline}</p>
             </div>
-            {!page && (
-              <form onSubmit={handleSubmit}>
-                <input type="hidden" name="id" value={listing.id} />
-                <Button disabled={isInTodos || isPending}>
-                  {isPending
-                    ? "Adding..."
-                    : isInTodos
-                      ? "Added"
-                      : "Add to To-Do"}
-                </Button>
-              </form>
-            )}
+            <div className="flex justify-between">
+              {!page && (
+                <form onSubmit={handleSubmit}>
+                  <input type="hidden" name="id" value={listing.id} />
+                  <Button disabled={isInTodos || isPending}>
+                    {isPending
+                      ? "Adding..."
+                      : isInTodos
+                        ? "Added"
+                        : "Add to To-Do"}
+                  </Button>
+                </form>
+              )}
+              {deleteable && (
+                <form onSubmit={handleDeleteListing}>
+                  <input type="hidden" name="id" value={listing.id} />
+                  <Button variant="destructive" disabled={isDeleting}>
+                    {isDeleting ? "Deleting..." : "Delete"}
+                  </Button>
+                </form>
+              )}
+            </div>
           </div>
         </CardContent>
       </Card>
