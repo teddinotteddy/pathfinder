@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { cn } from "@/lib/utils";
 import { addDays, format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
@@ -130,6 +130,7 @@ const tags = [
 
 export default function Create() {
   const { toast } = useToast();
+
   const [open, setOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [ageRequirement, setAgeRequirement] = useState("13+");
@@ -138,6 +139,8 @@ export default function Create() {
     from: new Date(),
     to: addDays(new Date(), 30),
   });
+
+  const [isPending, startTransition] = useTransition();
 
   const toggleTag = (currentTag) => {
     setSelectedTags((prev) =>
@@ -158,28 +161,31 @@ export default function Create() {
     const formData = new FormData(event.target);
 
     formData.append(
-      "tags" /*change the word the tag actually says, next step change color*/,
+      "tags",
       JSON.stringify(selectedTags.map((tag) => tag.value)),
     );
 
     formData.append("dateRange", JSON.stringify(date));
+    formData.append("deadline", JSON.stringify(deadline));
 
     formData.append("age", ageRequirement);
 
-    const result = await createListing(formData);
+    startTransition(async () => {
+      const result = await createListing(formData);
 
-    if (result.success) {
-      toast({
-        title: "Success",
-        description: "Listing created.",
-      });
-    } else {
-      toast({
-        title: "Error",
-        description: result.error,
-        variant: "destructive",
-      });
-    }
+      if (result.success) {
+        toast({
+          title: "Success",
+          description: "Listing created.",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: result.error,
+          variant: "destructive",
+        });
+      }
+    });
   }
   return (
     <div>
@@ -414,7 +420,9 @@ export default function Create() {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-            <Button>Create</Button>
+            <Button disabled={isPending}>
+              {isPending ? "Creating..." : "Create"}
+            </Button>
           </form>
         </CardContent>
       </Card>
