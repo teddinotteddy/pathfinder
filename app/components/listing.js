@@ -14,8 +14,12 @@ import {
 import { formatDate } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
-export default function Listing({ listing, todos }) {
+export default function Listing({ listing, todos, page }) {
   const { toast } = useToast();
+
+  if (page !== true) {
+    page = false;
+  }
 
   const tags = JSON.parse(listing.tags);
   const date = JSON.parse(listing.dateRange);
@@ -93,12 +97,18 @@ export default function Listing({ listing, todos }) {
               </p>
               <p className="text-sm">{formattedDeadline}</p>
             </div>
-            <form onSubmit={handleSubmit}>
-              <input type="hidden" name="id" value={listing.id} />
-              <Button disabled={isInTodos || isPending}>
-                {isPending ? "Adding..." : isInTodos ? "Added" : "Add to To-Do"}
-              </Button>
-            </form>
+            {!page && (
+              <form onSubmit={handleSubmit}>
+                <input type="hidden" name="id" value={listing.id} />
+                <Button disabled={isInTodos || isPending}>
+                  {isPending
+                    ? "Adding..."
+                    : isInTodos
+                      ? "Added"
+                      : "Add to To-Do"}
+                </Button>
+              </form>
+            )}
           </div>
         </CardContent>
       </Card>
