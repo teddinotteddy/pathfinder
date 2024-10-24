@@ -81,9 +81,19 @@ const tags = [
     value: "leadership",
     label: "Leadership",
   },
+
+  {
+    value: "communication",
+    label: "Communication",
+  },
+
   {
     value: "coding",
     label: "Coding",
+  },
+  {
+    value: "graphic-design",
+    label: "Graphic Design & Arts",
   },
   {
     value: "sports",
